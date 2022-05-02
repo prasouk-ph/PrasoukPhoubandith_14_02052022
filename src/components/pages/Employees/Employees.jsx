@@ -4,24 +4,67 @@ import './Employees.css';
 function Employees() {
 
   return (
-    <main>
-      <div className="hero">
-        <section className="hero-content">
-          <h2 className="sr-only">Promoted Content</h2>
-          <p className="subtitle">No fees.</p>
-          <p className="subtitle">No minimum deposit.</p>
-          <p className="subtitle">High interest rates.</p>
-          <p className="text">Open a savings account with Argent Bank today!</p>
+    <div>
+      <header className='employees-header'>
+        <h1>Current Employees</h1>
+      </header>
+
+      <main className='employees-main'>
+        <section className="filter-section">
+          <div className="display-filter">
+            <p>Show</p>
+
+            <select name="entries" id="entries">
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+
+            <p>entries</p>
+          </div>
+
+          <div className="search-filter">
+            <label htmlFor="search-bar">Search:</label>
+            <input type="text" id='search-bar'/>
+          </div>
         </section>
-      </div>
-      
-      <section className="features">
-        <h2 className="sr-only">Features</h2>
         
-        <div className="features-container">
-        </div>
-      </section>
-    </main>
+        <section className="table-section">
+          <table id="employee-table">
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Start Date</th>
+                <th>Department</th>
+                <th>Date of Birth</th>
+                <th>Street</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip Code</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td className='no-data' colSpan={9}>No data available in table</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div className="table-footer">
+            <p>Showing 1 to 2 of 2 entries</p>
+
+            <div className="pagination-command">
+              <p>Previous</p>
+              <p className='page-number'>1</p>
+              <p>Next</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
   );
 }
 
