@@ -1,0 +1,24 @@
+.home-main, .home-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#create-employee {
+  margin-top: 0em;
+  margin-block-end: 1em;
+}
+
+.employee-address {
+  margin-top: 10px;
+}
+
+input {
+  width: 150px;
+}
+
+label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 10px;
+}
