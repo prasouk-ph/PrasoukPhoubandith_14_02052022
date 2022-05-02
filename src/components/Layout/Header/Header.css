@@ -1,0 +1,28 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.logo {
+  width: 10vw;
+}
+
+.main-nav {
+  width: 10vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-icon {
+  color: #596F07;
+  font-size: 32px;
+  padding: 10px;
+}
+
+.header-icon:hover {
+  background-color: #596F07;
+  color: white;
+  border-radius: 5px;
+}
