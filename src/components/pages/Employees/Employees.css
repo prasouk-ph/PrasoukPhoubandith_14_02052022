@@ -4,6 +4,10 @@
   align-items: center;
 }
 
+.employees-main {
+  margin-bottom: 10vh;
+}
+
 .filter-section, .display-filter, .search-filter, .table-footer, .pagination-command {
   display: flex;
   justify-content: space-between;

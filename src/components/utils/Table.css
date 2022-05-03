@@ -1,0 +1,8 @@
+.table-options, .table-display {
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-display {
+  gap: 5px;
+}

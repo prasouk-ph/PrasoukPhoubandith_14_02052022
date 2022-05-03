@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useTable, useSortBy, useGlobalFilter, useAsyncDebounce } from 'react-table'
+import { useTable, useSortBy, useGlobalFilter, useAsyncDebounce, usePagination } from 'react-table'
+import './Table.css'
 
 
 function Table({ columns, data, className }) {
@@ -8,14 +9,22 @@ function Table({ columns, data, className }) {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
     prepareRow,
+    rows,
     state,
     setGlobalFilter,
+    page,
+    state: { pageIndex, pageSize },
+    gotoPage,
+    previousPage,
+    nextPage,
+    setPageSize,
+    canPreviousPage,
+    canNextPage,
   } = useTable({
     columns,
     data,
-  }, useGlobalFilter, useSortBy)
+  }, useGlobalFilter, useSortBy, usePagination)
   
   
   function GlobalFilter({
@@ -39,13 +48,36 @@ function Table({ columns, data, className }) {
     )
   }
 
+  const pageSizeOptions = [1, 2, 10, 25, 50, 100]
+
   // Render the UI for your table
   return (
     <div>
-      <GlobalFilter
-        globalFilter={state.globalFilter}
-        setGlobalFilter={setGlobalFilter}
-      />
+      <div className="table-options">
+        <div className='table-display'>
+          <p>Show</p>
+
+          <select
+            value={pageSize}
+            onChange={e => {
+              setPageSize(Number(e.target.value))
+            }}
+          >
+            {pageSizeOptions.map(pageSize => (
+              <option key={pageSize} value={pageSize}>
+                {pageSize}
+              </option>
+            ))}
+          </select >
+
+          <p>entries</p>
+        </div>
+    
+        <GlobalFilter
+          globalFilter={state.globalFilter}
+          setGlobalFilter={setGlobalFilter}
+        />
+      </div>
 
       <table className={className} {...getTableProps()}>
         <thead>
@@ -62,8 +94,9 @@ function Table({ columns, data, className }) {
             </tr>
           ))}
         </thead>
+
         <tbody {...getTableBodyProps()}>
-          {rows.map((row, i) => {
+          {page.map((row, i) => {
             prepareRow(row)
             return (
               <tr {...row.getRowProps()}>
@@ -75,6 +108,42 @@ function Table({ columns, data, className }) {
           })}
         </tbody>
       </table>
+
+      <div className="table-footer">
+        <p>Showing {(pageIndex * pageSize) + 1} to {(pageSize * pageIndex) + page.length} of {rows.length} entries</p>
+
+        <div className="pagination-commands">
+          <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+            {'Previous'}
+          </button>{' '}
+
+          <span>
+            {' '}
+            <strong>
+              {pageIndex + 1}
+            </strong>{' '}
+          </span>
+
+          <span>
+          | Go to page:{' '}
+          <input
+            type="number"
+            defaultValue={pageIndex + 1}
+            onChange={e => {
+              const page = e.target.value ? Number(e.target.value) - 1 : 0
+              gotoPage(page)
+            }}
+            style={{ width: '100px' }}
+          />
+        </span>{' '}
+
+          <button onClick={() => nextPage()} disabled={!canNextPage}>
+            {'Next'}
+          </button>{' '}
+
+        </div>
+      </div>
+
     </div>
   )
 }
