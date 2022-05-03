@@ -55,7 +55,6 @@ function Employees() {
     []
   )
 
-  // const data = useMemo(() => 20, [])
   const data = useMemo(
     () => [
       {
@@ -79,6 +78,17 @@ function Employees() {
         city: 'paris',
         state: 'france',
         zipCode: '78000',
+      },
+      {
+        firstName: 'gary',
+        lastName: 'jenkins',
+        startDate: '01/01/2010',
+        department: 'marketing',
+        dateOfBirth: '02/02/1990',
+        street: 'rue',
+        city: 'lyon',
+        state: 'france',
+        zipCode: '60000',
       },
     ],
     []
