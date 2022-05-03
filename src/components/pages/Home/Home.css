@@ -23,6 +23,10 @@ label {
   margin-bottom: 10px;
 }
 
+.react-datepicker__day--outside-month {
+  color: grey;
+}
+
 .ReactModal__Content {
   display: flex;
   flex-direction: column;

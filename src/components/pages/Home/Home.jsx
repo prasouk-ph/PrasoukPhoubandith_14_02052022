@@ -8,6 +8,7 @@ import './Home.css';
 
 
 function Home() {
+  const [birthDate, setBirthDate] = useState();
   const [startDate, setStartDate] = useState();
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -114,8 +115,8 @@ function Home() {
             <label htmlFor="date-of-birth">Date of Birth</label>
             <DatePicker
               id='date-of-birth'
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              selected={birthDate}
+              onChange={(date) => setBirthDate(date)}
               peekNextMonth
               showMonthDropdown
               showYearDropdown
