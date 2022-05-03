@@ -1,7 +1,12 @@
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import './Home.css';
 
 
 function Home() {
+  const [startDate, setStartDate] = useState();
+
   return (
     <div>
       <header className='home-header'>
@@ -18,10 +23,30 @@ function Home() {
             <input type="text" name='last-name' id='last-name' />
 
             <label htmlFor="date-of-birth">Date of Birth</label>
-            <input type="date" name='date-of-birth' id='date-of-birth' />
+            <DatePicker
+              id='date-of-birth'
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              peekNextMonth
+              showMonthDropdown
+              showYearDropdown
+              todayButton="Today"
+              dropdownMode="select"
+              placeholderText="DD/MM/YYYY"
+            />
 
             <label htmlFor="start-date">Start Date</label>
-            <input type="date" name='start-date' id='start-date' />
+            <DatePicker
+              id='start-date'
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              peekNextMonth
+              showMonthDropdown
+              showYearDropdown
+              todayButton="Today"
+              dropdownMode="select"
+              placeholderText="DD/MM/YYYY"
+            />
           </div>
 
           <fieldset className="employee-address">
