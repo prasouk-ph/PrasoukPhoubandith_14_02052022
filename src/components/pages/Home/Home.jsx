@@ -35,7 +35,7 @@ function Home() {
 
   ReactModal.setAppElement(document.getElementById('root'));
 
-  const options = [
+  const statesOptions = [
     { value: 'AL', label: 'Alabama' },
     { value: 'AK', label: 'Alaska' },
     { value: 'AS', label: 'American Samoa' },
@@ -97,6 +97,14 @@ function Home() {
     { value: 'WY', label: 'Wyoming' },
   ]
 
+  const departmentsOptions = [
+    { value: 'sales', label: 'Sales' },
+    { value: 'marketing', label: 'Marketing' },
+    { value: 'engineering', label: 'Engineering' },
+    { value: 'human Resources', label: 'Human Resources' },
+    { value: 'legal', label: 'Legal' },
+  ]
+
   return (
     <div>
       <header className='home-header'>
@@ -149,7 +157,7 @@ function Home() {
             <input id="city" type="text" />
 
             <label htmlFor="state">State</label>
-            <Dropdown id="state" options={options} placeholder="Select an option" />
+            <Dropdown id="state" options={statesOptions} placeholder="Select an option" />
 
             <label htmlFor="zip-code">Zip Code</label>
             <input id="zip-code" type="number" />
@@ -157,13 +165,7 @@ function Home() {
 
           <div className='employee-department'>
             <label htmlFor="departments">Department</label>
-            <select name="departments" id="departments">
-              <option value="sales">Sales</option>
-              <option value="marketing">Marketing</option>
-              <option value="engineering">Engineering</option>
-              <option value="human Resources">Human Resources</option>
-              <option value="legal">Legal</option>
-            </select>
+            <Dropdown id="departments" options={departmentsOptions} placeholder="Select an option" />
           </div>
         </form>
         
