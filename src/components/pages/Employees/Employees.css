@@ -64,3 +64,13 @@ td {
   padding: 10px 15px;
   background: linear-gradient(to bottom, #fff 0%, #dcdcdc 100%);
 }
+
+
+
+.table-section {
+  margin-bottom: 100px;
+}
+
+.employees-table {
+  width: 100%;
+}

@@ -4,6 +4,10 @@
   align-items: center;
 }
 
+.home-main {
+  margin-bottom: 15vh;
+}
+
 #create-employee {
   margin-top: 0em;
   margin-block-end: 1em;

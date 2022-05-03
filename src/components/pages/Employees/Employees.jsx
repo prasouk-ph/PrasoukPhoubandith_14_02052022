@@ -1,7 +1,88 @@
+import Table from '../../utils/Table';
+import { useMemo } from 'react';
 import './Employees.css';
 
 
 function Employees() {
+  const columns = useMemo(
+    () => [
+      {
+        Header: 'First Name',
+        accessor: 'firstName',
+        sortType: 'basic',
+      },
+      {
+        Header: 'Last Name',
+        accessor: 'lastName',
+        sortType: 'basic',
+      },
+      {
+        Header: 'Start Date',
+        accessor: 'startDate',
+        sortType: 'basic',
+      },
+      {
+        Header: 'Department',
+        accessor: 'department',
+        sortType: 'basic',
+      },
+      {
+        Header: 'Date of Birth',
+        accessor: 'dateOfBirth',
+        sortType: 'basic',
+      },
+      {
+        Header: 'Street',
+        accessor: 'street',
+        sortType: 'basic',
+      },
+      {
+        Header: 'City',
+        accessor: 'city',
+        sortType: 'basic',
+      },
+      {
+        Header: 'State',
+        accessor: 'state',
+        sortType: 'basic',
+      },
+      {
+        Header: 'Zip Code',
+        accessor: 'zipCode',
+        sortType: 'basic',
+      },
+    ],
+    []
+  )
+
+  // const data = useMemo(() => 20, [])
+  const data = useMemo(
+    () => [
+      {
+        firstName: 'first',
+        lastName: 'lastName',
+        startDate: 'startDate',
+        department: 'department',
+        dateOfBirth: 'dateOfBirth',
+        street: 'street',
+        city: 'city',
+        state: 'state',
+        zipCode: 'zipCode',
+      },
+      {
+        firstName: 'paul',
+        lastName: 'pierce',
+        startDate: '01/01/2000',
+        department: 'sales',
+        dateOfBirth: '02/02/1980',
+        street: 'street',
+        city: 'paris',
+        state: 'france',
+        zipCode: '78000',
+      },
+    ],
+    []
+  )
 
   return (
     <div>
@@ -63,6 +144,8 @@ function Employees() {
             </div>
           </div>
         </section>
+
+        <Table className='employees-table' columns={columns} data={data} />
       </main>
     </div>
   );
