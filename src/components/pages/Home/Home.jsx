@@ -1,11 +1,36 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
+import ReactModal from 'react-modal';
 import "react-datepicker/dist/react-datepicker.css";
 import './Home.css';
 
 
 function Home() {
   const [startDate, setStartDate] = useState();
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      padding: "20px 5vw",
+    },
+  };
+
+  ReactModal.setAppElement(document.getElementById('root'));
 
   return (
     <div>
@@ -137,7 +162,16 @@ function Home() {
           </div>
         </form>
         
-        <button type='submit'>Save</button>
+        <button type='submit' onClick={openModal}>Save</button>
+        <ReactModal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel="Form Submit Modal"
+        >
+          <p>Employee Created!</p>
+          <button className="button-close" onClick={closeModal}>Close</button>
+        </ReactModal>
       </main>
     </div>
   );
