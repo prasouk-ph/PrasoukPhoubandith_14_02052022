@@ -28,3 +28,24 @@
     color: #596F07;
     font-weight: bold;
 }
+
+@media screen and (max-width: 480px) {
+    .NotFoundPage {
+        margin: 200px 90px;
+    }
+
+    .NotFoundPage p:nth-child(1) {
+        font-size: 25.6vw;
+        margin: 0 0 1.1530398322851vh 0;
+        font-weight: bold;
+    }
+
+    .NotFoundPage p:nth-child(2) {
+        font-size: 4.8vw;
+        margin: 0 0 13.941299790356vh 0;
+    }
+
+    .link {
+        font-size: 3.733vw;
+    }
+}

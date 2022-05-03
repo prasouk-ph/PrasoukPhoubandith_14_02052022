@@ -18,10 +18,10 @@ function Home() {
             <input type="text" name='last-name' id='last-name' />
 
             <label htmlFor="date-of-birth">Date of Birth</label>
-            <input type="text" name='date-of-birth' id='date-of-birth' />
+            <input type="date" name='date-of-birth' id='date-of-birth' />
 
             <label htmlFor="start-date">Start Date</label>
-            <input type="text" name='start-date' id='start-date' />
+            <input type="date" name='start-date' id='start-date' />
           </div>
 
           <fieldset className="employee-address">
