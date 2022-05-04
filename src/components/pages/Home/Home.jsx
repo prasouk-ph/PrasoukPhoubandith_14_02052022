@@ -5,6 +5,7 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import "react-datepicker/dist/react-datepicker.css";
 import './Home.css';
+import employeeCreate from '../../services/employeeService/employeeCreate'
 
 
 function Home() {
@@ -65,7 +66,7 @@ function Home() {
 
   function handleSubmit(event) {
     event.preventDefault()
-    console.log(formData)
+    employeeCreate(formData)
   }
 
 
