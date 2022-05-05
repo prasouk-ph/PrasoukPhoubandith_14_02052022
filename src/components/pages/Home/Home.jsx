@@ -2,23 +2,24 @@ import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import ReactModal from 'react-modal';
 import Dropdown from 'react-dropdown';
+import { useDispatch } from 'react-redux';
+import { employeeCreated } from '../../../store/store';
 import 'react-dropdown/style.css';
 import "react-datepicker/dist/react-datepicker.css";
 import './Home.css';
-import employeeCreate from '../../services/employeeService/employeeCreate'
 
 
 function Home() {
   const initialFormData = {
-    firstname: '',
-    lastname: '',
-    dateofbirth: '',
-    startdate: '',
+    firstName: '',
+    lastName: '',
+    dateOfBirth: '',
+    startDate: '',
     street: '',
     city: '',
     state: '',
-    zipcode: '',
-    departments: ''
+    zipCode: '',
+    department: ''
   }
 
   const [formData, setFormData] = useState(initialFormData)
@@ -26,6 +27,7 @@ function Home() {
   const [startDate, setStartDate] = useState('');
   const [modalIsOpen, setIsOpen] = useState(false);
 
+  const dispatch = useDispatch()
 
   function handleTextInputChange(event) {
     setFormData({
@@ -45,13 +47,13 @@ function Home() {
 
   useEffect(() => {
     const birthDateFormatted = new Date(birthDate).toLocaleDateString('en-US', {month: "2-digit", day: "2-digit", year: "numeric"})
-    handleDateInputChange('dateofbirth', birthDateFormatted)
+    handleDateInputChange('dateOfBirth', birthDateFormatted)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [birthDate])
 
   useEffect(() => {
     const startDateFormatted = new Intl.DateTimeFormat('en-US', {month: "2-digit", day: "2-digit", year: "numeric"}).format(startDate); // to avoid invalid date
-    handleDateInputChange('startdate', startDateFormatted)
+    handleDateInputChange('startDate', startDateFormatted)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startDate])
 
@@ -66,7 +68,7 @@ function Home() {
 
   function handleSubmit(event) {
     event.preventDefault()
-    employeeCreate(formData)
+    dispatch(employeeCreated(formData))
   }
 
 
@@ -94,73 +96,73 @@ function Home() {
   ReactModal.setAppElement(document.getElementById('root'));
 
   const statesOptions = [
-    { value: 'AL', label: 'Alabama', className: 'state' },
+    { value: 'AL', label: 'Alabama' },
     { value: 'AK', label: 'Alaska' },
-    { value: 'AS', label: 'American Samoa', className: 'state' },
-    { value: 'AZ', label: 'Arizona', className: 'state' },
-    { value: 'AR', label: 'Arkansas', className: 'state' },
-    { value: 'CA', label: 'California', className: 'state' },
-    { value: 'CO', label: 'Colorado', className: 'state' },
-    { value: 'CT', label: 'Connecticut', className: 'state' },
-    { value: 'DE', label: 'Delaware', className: 'state' },
-    { value: 'DC', label: 'District Of Columbia', className: 'state' },
-    { value: 'FM', label: 'Federated States Of Micronesia', className: 'state' },
-    { value: 'FL', label: 'Florida', className: 'state' },
-    { value: 'GA', label: 'Georgia', className: 'state' },
+    { value: 'AS', label: 'American Samoa' },
+    { value: 'AZ', label: 'Arizona' },
+    { value: 'AR', label: 'Arkansas' },
+    { value: 'CA', label: 'California' },
+    { value: 'CO', label: 'Colorado' },
+    { value: 'CT', label: 'Connecticut' },
+    { value: 'DE', label: 'Delaware' },
+    { value: 'DC', label: 'District Of Columbia' },
+    { value: 'FM', label: 'Federated States Of Micronesia' },
+    { value: 'FL', label: 'Florida' },
+    { value: 'GA', label: 'Georgia' },
     { value: 'GU', label: 'Guam' },
     { value: 'HI', label: 'Hawaii' },
     { value: 'ID', label: 'Idaho' },
-    { value: 'IL', label: 'Illinois', className: 'state' },
-    { value: 'IN', label: 'Indiana', className: 'state' },
+    { value: 'IL', label: 'Illinois' },
+    { value: 'IN', label: 'Indiana' },
     { value: 'IA', label: 'Iowa' },
     { value: 'KS', label: 'Kansas' },
-    { value: 'KY', label: 'Kentucky', className: 'state' },
-    { value: 'LA', label: 'Louisiana', className: 'state' },
+    { value: 'KY', label: 'Kentucky' },
+    { value: 'LA', label: 'Louisiana' },
     { value: 'ME', label: 'Maine' },
-    { value: 'MH', label: 'Marshall Islands', className: 'state' },
-    { value: 'MD', label: 'Maryland', className: 'state' },
-    { value: 'MA', label: 'Massachusetts', className: 'state' },
-    { value: 'MI', label: 'Michigan', className: 'state' },
-    { value: 'MN', label: 'Minnesota', className: 'state' },
-    { value: 'MS', label: 'Mississippi', className: 'state' },
-    { value: 'MO', label: 'Missouri', className: 'state' },
-    { value: 'MT', label: 'Montana', className: 'state' },
-    { value: 'NE', label: 'Nebraska', className: 'state' },
+    { value: 'MH', label: 'Marshall Islands' },
+    { value: 'MD', label: 'Maryland' },
+    { value: 'MA', label: 'Massachusetts' },
+    { value: 'MI', label: 'Michigan' },
+    { value: 'MN', label: 'Minnesota' },
+    { value: 'MS', label: 'Mississippi' },
+    { value: 'MO', label: 'Missouri' },
+    { value: 'MT', label: 'Montana' },
+    { value: 'NE', label: 'Nebraska' },
     { value: 'NV', label: 'Nevada' },
-    { value: 'NH', label: 'New Hampshire', className: 'state' },
-    { value: 'NJ', label: 'New Jersey', className: 'state' },
-    { value: 'NM', label: 'New Mexico', className: 'state' },
-    { value: 'NY', label: 'New York', className: 'state' },
-    { value: 'NC', label: 'North Carolina', className: 'state' },
-    { value: 'ND', label: 'North Dakota', className: 'state' },
-    { value: 'MP', label: 'Northern Mariana Islands', className: 'state' },
+    { value: 'NH', label: 'New Hampshire' },
+    { value: 'NJ', label: 'New Jersey' },
+    { value: 'NM', label: 'New Mexico' },
+    { value: 'NY', label: 'New York' },
+    { value: 'NC', label: 'North Carolina' },
+    { value: 'ND', label: 'North Dakota' },
+    { value: 'MP', label: 'Northern Mariana Islands' },
     { value: 'OH', label: 'Ohio' },
-    { value: 'OK', label: 'Oklahoma', className: 'state' },
+    { value: 'OK', label: 'Oklahoma' },
     { value: 'OR', label: 'Oregon' },
     { value: 'PW', label: 'Palau' },
-    { value: 'PA', label: 'Pennsylvania', className: 'state' },
-    { value: 'PR', label: 'Puerto Rico', className: 'state' },
-    { value: 'RI', label: 'Rhode Island', className: 'state' },
-    { value: 'SC', label: 'South Carolina', className: 'state' },
-    { value: 'SD', label: 'South Dakota', className: 'state' },
-    { value: 'TN', label: 'Tennessee', className: 'state' },
+    { value: 'PA', label: 'Pennsylvania' },
+    { value: 'PR', label: 'Puerto Rico' },
+    { value: 'RI', label: 'Rhode Island' },
+    { value: 'SC', label: 'South Carolina' },
+    { value: 'SD', label: 'South Dakota' },
+    { value: 'TN', label: 'Tennessee' },
     { value: 'TV', label: 'Texas' },
     { value: 'UT', label: 'Utah' },
-    { value: 'VT', label: 'Vermont', className: 'state' },
-    { value: 'VI', label: 'Virgin Islands', className: 'state' },
-    { value: 'VA', label: 'Virginia', className: 'state' },
-    { value: 'WA', label: 'Washington', className: 'state' },
-    { value: 'WV', label: 'West Virginia', className: 'state' },
-    { value: 'WI', label: 'Wisconsin', className: 'state' },
-    { value: 'WY', label: 'Wyoming', className: 'state' },
+    { value: 'VT', label: 'Vermont' },
+    { value: 'VI', label: 'Virgin Islands' },
+    { value: 'VA', label: 'Virginia' },
+    { value: 'WA', label: 'Washington' },
+    { value: 'WV', label: 'West Virginia' },
+    { value: 'WI', label: 'Wisconsin' },
+    { value: 'WY', label: 'Wyoming' },
   ]
 
   const departmentsOptions = [
-    { value: 'sales', label: 'Sales', className: 'departments' },
-    { value: 'marketing', label: 'Marketing', className: 'departments' },
-    { value: 'engineering', label: 'Engineering', className: 'departments' },
-    { value: 'human Resources', label: 'Human Resources', className: 'departments' },
-    { value: 'legal', label: 'Legal', className: 'departments' },
+    { value: 'sales', label: 'Sales' },
+    { value: 'marketing', label: 'Marketing' },
+    { value: 'engineering', label: 'Engineering' },
+    { value: 'human Resources', label: 'Human Resources' },
+    { value: 'legal', label: 'Legal' },
   ]
 
   return (
@@ -172,16 +174,16 @@ function Home() {
       <main className='home-main'>
         <form action="#" id='create-employee' onSubmit={handleSubmit}>
           <div className='employee-data'>
-            <label htmlFor="firstname">First Name</label>
-            <input type="text" name='firstname' id='firstname' onChange={handleTextInputChange} />
+            <label htmlFor="firstName">First Name</label>
+            <input type="text" name='firstName' id='firstName' onChange={handleTextInputChange} />
 
-            <label htmlFor="lastname">Last Name</label>
-            <input type="text" name='lastname' id='lastname' onChange={handleTextInputChange} />
+            <label htmlFor="lastName">Last Name</label>
+            <input type="text" name='lastName' id='lastName' onChange={handleTextInputChange} />
 
-            <label htmlFor="dateofbirth">Date of Birth</label>
+            <label htmlFor="dateOfBirth">Date of Birth</label>
             <DatePicker
-              id='dateofbirth'
-              name='dateofbirth'
+              id='dateOfBirth'
+              name='dateOfBirth'
               selected={birthDate}
               onChange={(date) => {
                 setBirthDate(date)
@@ -194,10 +196,10 @@ function Home() {
               placeholderText="DD/MM/YYYY"
             />
 
-            <label htmlFor="startdate">Start Date</label>
+            <label htmlFor="startDate">Start Date</label>
             <DatePicker
-              id='startdate'
-              name='startdate'
+              id='startDate'
+              name='startDate'
               selected={startDate}
               onChange={(date) => {
                 setStartDate(date)
@@ -223,13 +225,13 @@ function Home() {
             <label htmlFor="state">State</label>
             <Dropdown name="state" id="state" options={statesOptions} placeholder="Select an option" onChange={(event) => handleDropDownChange(event, 'state')} />
 
-            <label htmlFor="zipcode">Zip Code</label>
-            <input name="zipcode" id="zipcode" type="number" onChange={handleTextInputChange} />
+            <label htmlFor="zipCode">Zip Code</label>
+            <input name="zipCode" id="zipCode" type="number" onChange={handleTextInputChange} />
           </fieldset>
 
           <div className='employee-department'>
             <label htmlFor="departments">Department</label>
-            <Dropdown name="departments" id="departments" options={departmentsOptions} placeholder="Select an option" onChange={(event) => handleDropDownChange(event, 'departments')} />
+            <Dropdown name="departments" id="department" options={departmentsOptions} placeholder="Select an option" onChange={(event) => handleDropDownChange(event, 'department')} />
           </div>
         
           <button type='submit' onClick={openModal} >Save</button>
