@@ -90,7 +90,7 @@ function Employees() {
       </header>
 
       <main className='employees-main'>
-        <section className="filter-section">
+        {/* <section className="filter-section">
           <div className="display-filter">
             <p>Show</p>
 
@@ -142,7 +142,7 @@ function Employees() {
               <p>Next</p>
             </div>
           </div>
-        </section>
+        </section> */}
 
         <Table className='employees-table' columns={columns} data={data} />
       </main>

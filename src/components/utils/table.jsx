@@ -96,6 +96,11 @@ function Table({ columns, data, className }) {
         </thead>
 
         <tbody {...getTableBodyProps()}>
+          {page.length === 0 &&
+            <tr>
+              <td className='no-data' colSpan={9} >No data available in table</td>
+            </tr>
+          }
           {page.map((row, i) => {
             prepareRow(row)
             return (
@@ -110,7 +115,7 @@ function Table({ columns, data, className }) {
       </table>
 
       <div className="table-footer">
-        <p>Showing {(pageIndex * pageSize) + 1} to {(pageSize * pageIndex) + page.length} of {rows.length} entries</p>
+        <p>Showing {rows.length !== 0 ? (pageIndex * pageSize) + 1 : 0} to {(pageSize * pageIndex) + page.length} of {rows.length} entries</p>
 
         <div className="pagination-commands">
           <button onClick={() => previousPage()} disabled={!canPreviousPage}>
