@@ -16,13 +16,13 @@
 }
 
 .header-icon {
-  color: #596F07;
+  color: #6D850F;
   font-size: 32px;
   padding: 10px;
 }
 
 .header-icon:hover {
-  background-color: #596F07;
+  background-color: #6D850F;
   color: white;
   border-radius: 5px;
 }

@@ -14,6 +14,7 @@ function Table({ columns, data, className }) {
     state,
     setGlobalFilter,
     page,
+    pageCount,
     state: { pageIndex, pageSize },
     gotoPage,
     previousPage,
@@ -125,12 +126,12 @@ function Table({ columns, data, className }) {
           <span>
             {' '}
             <strong>
-              {pageIndex + 1}
+              Page {pageIndex + 1} of {rows.length !== 0 ? pageCount : 1}
             </strong>{' '}
           </span>
 
           <span>
-          | Go to page:{' '}
+          | Go to:{' '}
           <input
             type="number"
             defaultValue={pageIndex + 1}

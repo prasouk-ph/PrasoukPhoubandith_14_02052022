@@ -4,21 +4,52 @@
   align-items: center;
 }
 
+.home-header {
+  color: #6D850F;
+}
+
 .home-main {
+  background-color: #F9FAEF;
+  padding: 50px;
+  width: 70vw;
+  margin: auto;
   margin-bottom: 15vh;
+  border-radius: 10px;
 }
 
 #create-employee {
   margin-top: 0em;
   margin-block-end: 1em;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  gap: 50px;
 }
 
-.employee-address {
-  margin-top: 10px;
+.fieldset-legend {
+  font-weight: bold;
+  background-color: #6D850F;
+  width: -webkit-fill-available;
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.employee-data, .employee-address {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: none;
 }
 
 input {
-  width: 150px;
+  width: -webkit-fill-available;
+  height: 18px;
+  border: 1px solid #ccc;
+  outline: none;
+  padding: 8px 10px;
 }
 
 label {
@@ -27,8 +58,24 @@ label {
   margin-bottom: 10px;
 }
 
+.react-datepicker__header, .react-datepicker__today-button {
+  background-color: #6D850F;
+}
+
+.react-datepicker__current-month, .react-datepicker__day-name, .react-datepicker__today-button {
+  color: white;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: white;
+}
+
 .react-datepicker__day--outside-month {
   color: grey;
+}
+
+.Dropdown-option:hover, .Dropdown-option.is-selected {
+  background-color: #F9FAEF;
 }
 
 .ReactModal__Content {
@@ -37,8 +84,18 @@ label {
   align-items: center;
 }
 
+.button-save {
+  background: #6D850F;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  width: 30%;
+}
+
 .button-close {
-  background-color: #596F07;
+  background-color: #6D850F;
   border: none;
   border-radius: 5px;
   color: white;

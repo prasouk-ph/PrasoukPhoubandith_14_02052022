@@ -5,7 +5,11 @@
 }
 
 .employees-main {
-  margin-bottom: 10vh;
+  margin-bottom: 20vh;
+}
+
+.employees-header {
+  color: #596F07;
 }
 
 .filter-section, .display-filter, .search-filter, .table-footer, .pagination-command {

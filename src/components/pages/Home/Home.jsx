@@ -173,14 +173,13 @@ function Home() {
 
       <main className='home-main'>
         <form action="#" id='create-employee' onSubmit={handleSubmit}>
-          <div className='employee-data'>
-            <label htmlFor="firstName">First Name</label>
-            <input type="text" name='firstName' id='firstName' onChange={handleTextInputChange} />
+          <fieldset className='employee-data'>
+            <legend className="fieldset-legend" >Informations</legend>
+            
+            <input type="text" name='firstName' id='firstName' placeholder="First Name" onChange={handleTextInputChange} />
 
-            <label htmlFor="lastName">Last Name</label>
-            <input type="text" name='lastName' id='lastName' onChange={handleTextInputChange} />
+            <input type="text" name='lastName' id='lastName' placeholder="Last Name" onChange={handleTextInputChange} />
 
-            <label htmlFor="dateOfBirth">Date of Birth</label>
             <DatePicker
               id='dateOfBirth'
               name='dateOfBirth'
@@ -193,10 +192,9 @@ function Home() {
               showYearDropdown
               todayButton="Today"
               dropdownMode="select"
-              placeholderText="DD/MM/YYYY"
+              placeholderText="Date of Birth (DD/MM/YYYY)"
             />
 
-            <label htmlFor="startDate">Start Date</label>
             <DatePicker
               id='startDate'
               name='startDate'
@@ -209,42 +207,37 @@ function Home() {
               showYearDropdown
               todayButton="Today"
               dropdownMode="select"
-              placeholderText="DD/MM/YYYY"
+              placeholderText="Start Date (DD/MM/YYYY)"
             />
-          </div>
 
-          <fieldset className="employee-address">
-            <legend>Address</legend>
-
-            <label htmlFor="street">Street</label>
-            <input name="street" id="street" type="text" onChange={handleTextInputChange} />
-
-            <label htmlFor="city">City</label>
-            <input name="city" id="city" type="text" onChange={handleTextInputChange} />
-
-            <label htmlFor="state">State</label>
-            <Dropdown name="state" id="state" options={statesOptions} placeholder="Select an option" onChange={(event) => handleDropDownChange(event, 'state')} />
-
-            <label htmlFor="zipCode">Zip Code</label>
-            <input name="zipCode" id="zipCode" type="number" onChange={handleTextInputChange} />
+            <div className='employee-department'>
+              <Dropdown name="departments" id="department" options={departmentsOptions} placeholder="Department" onChange={(event) => handleDropDownChange(event, 'department')} />
+            </div>
           </fieldset>
 
-          <div className='employee-department'>
-            <label htmlFor="departments">Department</label>
-            <Dropdown name="departments" id="department" options={departmentsOptions} placeholder="Select an option" onChange={(event) => handleDropDownChange(event, 'department')} />
-          </div>
-        
-          <button type='submit' onClick={openModal} >Save</button>
-          <ReactModal
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            style={customStyles}
-            contentLabel="Form Submit Modal"
-            >
-            <p>Employee Created!</p>
-            <button className="button-close" onClick={closeModal}>Close</button>
-          </ReactModal>
+          <fieldset className="employee-address">
+            <legend className="fieldset-legend">Address</legend>
+
+            <input name="street" id="street" type="text" placeholder="Street" onChange={handleTextInputChange} />
+
+            <input name="city" id="city" type="text" placeholder="City" onChange={handleTextInputChange} />
+
+            <Dropdown name="state" id="state" options={statesOptions} placeholder="State" onChange={(event) => handleDropDownChange(event, 'state')} />
+
+            <input name="zipCode" id="zipCode" type="number" placeholder="Zip Code" onChange={handleTextInputChange} />
+          </fieldset>
         </form>
+
+        <button type='submit' form="create-employee" className="button-save" onClick={openModal} >Save</button>
+        <ReactModal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel="Form Submit Modal"
+          >
+          <p>Employee Created!</p>
+          <button className="button-close" onClick={closeModal}>Close</button>
+        </ReactModal>
       </main>
     </div>
   );
