@@ -176,9 +176,9 @@ function Home() {
           <fieldset className='employee-data'>
             <legend className="fieldset-legend" >Informations</legend>
             
-            <input type="text" name='firstName' id='firstName' placeholder="First Name" onChange={handleTextInputChange} />
+            <input className="form-input" type="text" name='firstName' id='firstName' placeholder="First Name" onChange={handleTextInputChange} />
 
-            <input type="text" name='lastName' id='lastName' placeholder="Last Name" onChange={handleTextInputChange} />
+            <input className="form-input" type="text" name='lastName' id='lastName' placeholder="Last Name" onChange={handleTextInputChange} />
 
             <DatePicker
               id='dateOfBirth'
@@ -218,13 +218,13 @@ function Home() {
           <fieldset className="employee-address">
             <legend className="fieldset-legend">Address</legend>
 
-            <input name="street" id="street" type="text" placeholder="Street" onChange={handleTextInputChange} />
+            <input className="form-input" name="street" id="street" type="text" placeholder="Street" onChange={handleTextInputChange} />
 
-            <input name="city" id="city" type="text" placeholder="City" onChange={handleTextInputChange} />
+            <input className="form-input" name="city" id="city" type="text" placeholder="City" onChange={handleTextInputChange} />
 
             <Dropdown name="state" id="state" options={statesOptions} placeholder="State" onChange={(event) => handleDropDownChange(event, 'state')} />
 
-            <input name="zipCode" id="zipCode" type="number" placeholder="Zip Code" onChange={handleTextInputChange} />
+            <input className="form-input" name="zipCode" id="zipCode" type="text" placeholder="Zip Code" onChange={handleTextInputChange} />
           </fieldset>
         </form>
 

@@ -49,11 +49,11 @@ function Table({ columns, data, className }) {
     )
   }
 
-  const pageSizeOptions = [1, 2, 10, 25, 50, 100]
+  const pageSizeOptions = [10, 25, 50, 100]
 
   // Render the UI for your table
   return (
-    <div>
+    <div className='table-container'>
       <div className="table-options">
         <div className='table-display'>
           <p>Show</p>
@@ -81,14 +81,14 @@ function Table({ columns, data, className }) {
       </div>
 
       <table className={className} {...getTableProps()}>
-        <thead>
+        <thead className={`${className}-header`}>
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                <th className={`${className}-header-th`} {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render('Header')}
-                  <span>
-                    {column.isSorted ? (column.isSortedDesc ? ' ↓' : ' ↑') : ' ↕'}
+                  <span className="table-header-icon">
+                    {column.isSorted ? (column.isSortedDesc ? '↓' : '↑') : '↕'}
                   </span>
                 </th>
               ))}
@@ -116,11 +116,11 @@ function Table({ columns, data, className }) {
       </table>
 
       <div className="table-footer">
-        <p>Showing {rows.length !== 0 ? (pageIndex * pageSize) + 1 : 0} to {(pageSize * pageIndex) + page.length} of {rows.length} entries</p>
+        <p className="table-results">Showing {rows.length !== 0 ? (pageIndex * pageSize) + 1 : 0} to {(pageSize * pageIndex) + page.length} of {rows.length} entries</p>
 
         <div className="pagination-commands">
-          <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-            {'Previous'}
+          <button className='pagination-button' onClick={() => previousPage()} disabled={!canPreviousPage}>
+            {'<'}
           </button>{' '}
 
           <span>
@@ -139,12 +139,14 @@ function Table({ columns, data, className }) {
               const page = e.target.value ? Number(e.target.value) - 1 : 0
               gotoPage(page)
             }}
-            style={{ width: '100px' }}
+            max={pageCount}
+            min="1"
+            className='page-redirection'
           />
         </span>{' '}
 
-          <button onClick={() => nextPage()} disabled={!canNextPage}>
-            {'Next'}
+          <button className='pagination-button' onClick={() => nextPage()} disabled={!canNextPage}>
+            {'>'}
           </button>{' '}
 
         </div>

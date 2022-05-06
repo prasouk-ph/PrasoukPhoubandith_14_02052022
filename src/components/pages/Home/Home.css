@@ -44,18 +44,12 @@
   border: none;
 }
 
-input {
+.form-input, .react-datepicker-wrapper input {
   width: -webkit-fill-available;
   height: 18px;
   border: 1px solid #ccc;
   outline: none;
   padding: 8px 10px;
-}
-
-label {
-  display: block;
-  margin-top: 1rem;
-  margin-bottom: 10px;
 }
 
 .react-datepicker__header, .react-datepicker__today-button {
