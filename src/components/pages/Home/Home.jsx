@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import ReactModal from 'react-modal';
 import Dropdown from 'react-dropdown';
-import { useDispatch } from 'react-redux';
-import { employeeCreated } from '../../../store/store';
+import { getItem, addItem } from '../../../services/LocaleStorage'
 import 'react-dropdown/style.css';
 import "react-datepicker/dist/react-datepicker.css";
 import './Home.css';
@@ -27,7 +26,6 @@ function Home() {
   const [startDate, setStartDate] = useState('');
   const [modalIsOpen, setIsOpen] = useState(false);
 
-  const dispatch = useDispatch()
 
   function handleTextInputChange(event) {
     setFormData({
@@ -68,7 +66,10 @@ function Home() {
 
   function handleSubmit(event) {
     event.preventDefault()
-    dispatch(employeeCreated(formData))
+    
+    const employees = JSON.parse(getItem("employees") || "[]") // create an empty array if doesn't exist
+    employees.push(formData)
+    addItem("employees", JSON.stringify(employees))
   }
 
 

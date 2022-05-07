@@ -1,11 +1,11 @@
 import Table from '../../utils/Table';
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux'
+import { getItem } from '../../../services/LocaleStorage'
 import './Employees.css';
 
 
 function Employees() {
-  const employees = useSelector((state) => state.employees)
+  const employees = JSON.parse(getItem("employees") || "[]") // create an empty array if doesn't exist
 
   const columns = useMemo(
     () => [
