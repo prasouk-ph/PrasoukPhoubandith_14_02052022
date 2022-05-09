@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
-import ReactModal from 'react-modal';
 import Dropdown from 'react-dropdown';
 import { getItem, addItem } from '../../../services/LocaleStorage'
 import 'react-dropdown/style.css';
 import "react-datepicker/dist/react-datepicker.css";
 import './Home.css';
-
+import Modal from '../../Modal/Modal'
 
 function Home() {
   const initialFormData = {
@@ -24,7 +23,17 @@ function Home() {
   const [formData, setFormData] = useState(initialFormData)
   const [birthDate, setBirthDate] = useState('');
   const [startDate, setStartDate] = useState('');
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsActive, setModalIsActive] = useState(false);
+
+
+  function openModal() {
+    setModalIsActive(true);
+  }
+
+
+  function closeModal() {
+    setModalIsActive(false);
+  }
 
 
   function handleTextInputChange(event) {
@@ -71,30 +80,6 @@ function Home() {
     employees.push(formData)
     addItem("employees", JSON.stringify(employees))
   }
-
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      padding: "20px 5vw",
-    },
-  };
-
-  ReactModal.setAppElement(document.getElementById('root'));
 
   const statesOptions = [
     { value: 'AL', label: 'Alabama' },
@@ -230,15 +215,7 @@ function Home() {
         </form>
 
         <button type='submit' form="create-employee" className="button-save" onClick={openModal} >Save</button>
-        <ReactModal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-          style={customStyles}
-          contentLabel="Form Submit Modal"
-          >
-          <p>Employee Created!</p>
-          <button className="button-close" onClick={closeModal}>Close</button>
-        </ReactModal>
+        <Modal isActive={modalIsActive} onClose={closeModal} message="Employee Created!" />
       </main>
     </div>
   );
