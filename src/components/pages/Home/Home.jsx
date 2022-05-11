@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import DatePicker from "react-datepicker";
-import Dropdown from 'react-dropdown';
 import { getItem, addItem } from '../../../services/LocaleStorage'
-import 'react-dropdown/style.css';
-import "react-datepicker/dist/react-datepicker.css";
 import './Home.css';
 import Modal from '../../Modal/Modal'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+
 
 function Home() {
   const initialFormData = {

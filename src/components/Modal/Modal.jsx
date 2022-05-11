@@ -37,7 +37,9 @@ function Modal({ isActive, onClose, message }) {
         </div> 
       </div>
     </div>,
-    document.querySelector("#root")
+    // replace by "document.body" to write test
+    // document.querySelector("#root")
+    document.body
   );
 }
 export default Modal;
