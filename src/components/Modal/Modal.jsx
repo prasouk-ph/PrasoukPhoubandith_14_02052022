@@ -28,12 +28,14 @@ function Modal({ isActive, onClose, message }) {
   return ReactDOM.createPortal(
     <div className="modal" onClick={onClose}>
       <div className="modal-content" onClick={event => event.stopPropagation()}> {/* prevent modal closing when click on modal content */}
+        <button onClick={onClose} className="modal-button-close modal-icon-close" name="secondary-close">X</button>
+
         <div className="modal-body">
           <p>{message}</p>
         </div>
 
         <div className="modal-footer">
-          <button onClick={onClose} className="modal-button-close" name="close">Close</button>
+          <button onClick={onClose} className="modal-button-close" name="main-close">Close</button>
         </div> 
       </div>
     </div>,
