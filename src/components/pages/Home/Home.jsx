@@ -76,10 +76,12 @@ function Home() {
 
   function handleSubmit(event) {
     event.preventDefault()
-    
+
     const employees = JSON.parse(getItem("employees") || "[]") // create an empty array if doesn't exist
     employees.push(formData)
     addItem("employees", JSON.stringify(employees))
+
+    openModal()
   }
 
   const statesOptions = [
@@ -215,7 +217,7 @@ function Home() {
           </fieldset>
         </form>
 
-        <button type='submit' form="create-employee" className="button-save" onClick={openModal} >Save</button>
+        <button type='submit' form="create-employee" className="button-save">Save</button>
         <Modal isActive={modalIsActive} onClose={closeModal} message="Employee Created!" />
       </main>
     </div>
