@@ -3,7 +3,7 @@ import { useTable, useSortBy, useGlobalFilter, useAsyncDebounce, usePagination }
 import './Table.css'
 
 
-function Table({ columns, data, className }) {
+function Table({ columns, data, className, error }) {
   // Use the state and functions returned from useTable to build your UI
   const {
     getTableProps,
@@ -97,7 +97,12 @@ function Table({ columns, data, className }) {
         </thead>
 
         <tbody {...getTableBodyProps()}>
-          {page.length === 0 &&
+          {error &&
+            <tr>
+              <td className='no-data' colSpan={9} >Can't get data !</td>
+            </tr>
+          }
+          {page.length === 0 && error === false &&
             <tr>
               <td className='no-data' colSpan={9} >No data available in table</td>
             </tr>

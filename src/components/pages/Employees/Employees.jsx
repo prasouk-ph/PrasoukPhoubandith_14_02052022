@@ -5,12 +5,18 @@ import './Employees.css';
 
 
 function Employees() {
-  const [ employees, setEmployees ] = useState([])
+  const [employees, setEmployees] = useState([])
+  const [error, setError] = useState(false)
 
   
   async function getData() {
-    const employeesList = await getEmployeesList()
-    setEmployees(employeesList)
+    try {
+      const employeesList = await getEmployeesList()
+      setEmployees(employeesList)
+      setError(false)
+    } catch (error) {
+      setError(true)
+    }
   }
 
   useEffect(() => {
@@ -81,7 +87,7 @@ function Employees() {
       </header>
 
       <main className='employees-main'>
-        <Table className='employees-table' columns={columns} data={data} />
+        <Table className='employees-table' columns={columns} data={data} error={error} />
       </main>
     </div>
   );

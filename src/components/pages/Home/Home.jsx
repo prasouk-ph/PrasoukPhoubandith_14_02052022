@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { getItem, addItem } from '../../../services/LocaleStorage'
 import './Home.css';
 import Modal from '../../Modal/Modal'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import { addEmployee } from "../../../services/employeesService";
 
 
 function Home() {
@@ -25,6 +25,7 @@ function Home() {
   const [birthDate, setBirthDate] = useState('');
   const [startDate, setStartDate] = useState('');
   const [modalIsActive, setModalIsActive] = useState(false);
+  const [modalMessage, setModalMessage] = useState(false);
 
 
   function openModal() {
@@ -77,10 +78,14 @@ function Home() {
   function handleSubmit(event) {
     event.preventDefault()
 
-    const employees = JSON.parse(getItem("employees") || "[]") // create an empty array if doesn't exist
-    employees.push(formData)
-    addItem("employees", JSON.stringify(employees))
-
+    try {
+      addEmployee(formData)
+    } catch (error) {
+      console.log(error)
+      setModalMessage("Can't create employee because of database issues!")
+    }
+    
+    setModalMessage("Employee Created!")
     openModal()
   }
 
@@ -218,7 +223,7 @@ function Home() {
         </form>
 
         <button type='submit' form="create-employee" className="button-save">Save</button>
-        <Modal isActive={modalIsActive} onClose={closeModal} message="Employee Created!" />
+        <Modal isActive={modalIsActive} onClose={closeModal} message={modalMessage} />
       </main>
     </div>
   );
