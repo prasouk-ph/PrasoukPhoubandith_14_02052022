@@ -1,11 +1,22 @@
 import Table from '../../utils/Table';
-import { useMemo } from 'react';
-import { getItem } from '../../../services/LocaleStorage'
+import { useMemo, useState, useEffect } from 'react';
+import { getEmployeesList } from '../../../services/employeesService';
 import './Employees.css';
 
 
 function Employees() {
-  const employees = JSON.parse(getItem("employees") || "[]") // create an empty array if doesn't exist
+  const [ employees, setEmployees ] = useState([])
+
+  
+  async function getData() {
+    const employeesList = await getEmployeesList()
+    setEmployees(employeesList)
+  }
+
+  useEffect(() => {
+    getData()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [employees])
 
   const columns = useMemo(
     () => [
