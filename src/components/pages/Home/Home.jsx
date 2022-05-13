@@ -80,12 +80,11 @@ function Home() {
 
     try {
       addEmployee(formData)
+      setModalMessage("Employee Created!")
     } catch (error) {
-      console.log(error)
       setModalMessage("Can't create employee because of database issues!")
     }
     
-    setModalMessage("Employee Created!")
     openModal()
   }
 
