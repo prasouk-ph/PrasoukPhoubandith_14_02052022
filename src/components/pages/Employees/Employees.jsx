@@ -8,7 +8,7 @@ function Employees() {
   const [employees, setEmployees] = useState([])
   const [error, setError] = useState(false)
 
-  
+
   async function getData() {
     try {
       const employeesList = await getEmployeesList()
@@ -22,7 +22,7 @@ function Employees() {
   useEffect(() => {
     getData()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [employees])
+  }, [])
 
   const columns = useMemo(
     () => [
