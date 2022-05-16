@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './Home.css';
-import Modal from '../../Modal/Modal'
+import Modal from 'react-modal-for-wealth-health'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Dropdown from 'react-dropdown';
