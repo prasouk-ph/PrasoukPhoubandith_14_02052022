@@ -49,11 +49,11 @@
 }
 
 .react-datepicker__header, .react-datepicker__today-button {
-  background-color: #6D850F;
+  background-color: #6D850F !important;
 }
 
 .react-datepicker__current-month, .react-datepicker__day-name, .react-datepicker__today-button {
-  color: white;
+  color: white !important;
 }
 
 .react-datepicker__navigation-icon::before {
