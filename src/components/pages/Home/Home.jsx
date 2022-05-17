@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import './Home.css';
 import Modal from 'react-modal-for-wealth-health'
 import DatePicker from "react-datepicker";
@@ -6,27 +6,18 @@ import "react-datepicker/dist/react-datepicker.css";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import { addEmployee } from "../../../services/employeesService";
+import { useForm, Controller } from "react-hook-form";
+import { ErrorMessage } from '@hookform/error-message';
 
 
 function Home() {
-  const initialFormData = {
-    firstName: '',
-    lastName: '',
-    dateOfBirth: '',
-    startDate: '',
-    street: '',
-    city: '',
-    state: '',
-    zipCode: '',
-    department: ''
-  }
-
-  const [formData, setFormData] = useState(initialFormData)
-  const [birthDate, setBirthDate] = useState('');
-  const [startDate, setStartDate] = useState('');
   const [modalIsActive, setModalIsActive] = useState(false);
-  const [modalMessage, setModalMessage] = useState(false);
+  const [modalMessage, setModalMessage] = useState("Employee Created!");
 
+  const { register, handleSubmit, formState: { errors }, control } = useForm({
+    criteriaMode: "all"
+  });
+  
 
   function openModal() {
     setModalIsActive(true);
@@ -37,49 +28,23 @@ function Home() {
     setModalIsActive(false);
   }
 
-
-  function handleTextInputChange(event) {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value
-    })
-  }
-
-
-  // can't use in onChange because will update only after 2 changes
-  function handleDateInputChange(inputName, inputValue) {
-    setFormData({
-      ...formData,
-      [inputName]: inputValue
-    })
-  }
-
-  useEffect(() => {
-    const birthDateFormatted = new Date(birthDate).toLocaleDateString('en-US', {month: "2-digit", day: "2-digit", year: "numeric"})
-    handleDateInputChange('dateOfBirth', birthDateFormatted)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [birthDate])
-
-  useEffect(() => {
-    const startDateFormatted = new Intl.DateTimeFormat('en-US', {month: "2-digit", day: "2-digit", year: "numeric"}).format(startDate); // to avoid invalid date
-    handleDateInputChange('startDate', startDateFormatted)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [startDate])
-
-
-  function handleDropDownChange(event, dropdownName) {
-    setFormData({
-      ...formData,
-      [dropdownName]: event.label
-    })
-  }
-
-
-  function handleSubmit(event) {
-    event.preventDefault()
+  function onSubmit(data) {
+    const dateOfBirthFormatted = new Date(data.dateOfBirth).toLocaleDateString('en-US', { month: "2-digit", day: "2-digit", year: "numeric" })
+    const startDateFormatted = new Date(data.startDate).toLocaleDateString('en-US', {month: "2-digit", day: "2-digit", year: "numeric"})
+    const formFormatted = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      dateOfBirth: dateOfBirthFormatted,
+      startDate: startDateFormatted,
+      street: data.street,
+      city: data.city,
+      state: data.state.label,
+      zipCode: data.zipCode,
+      departments: data.departments.label
+    }
 
     try {
-      addEmployee(formData)
+      addEmployee(formFormatted)
       setModalMessage("Employee Created!")
     } catch (error) {
       setModalMessage("Can't create employee because of database issues!")
@@ -165,59 +130,213 @@ function Home() {
       </header>
 
       <main className='home-main'>
-        <form action="#" id='create-employee' onSubmit={handleSubmit}>
+        <form action="#" id='create-employee' onSubmit={handleSubmit(onSubmit)}>
           <fieldset className='employee-data'>
             <legend className="fieldset-legend" >Informations</legend>
             
-            <input className="form-input" type="text" name='firstName' id='firstName' placeholder="First Name" onChange={handleTextInputChange} />
-
-            <input className="form-input" type="text" name='lastName' id='lastName' placeholder="Last Name" onChange={handleTextInputChange} />
-
-            <DatePicker
-              id='dateOfBirth'
-              name='dateOfBirth'
-              selected={birthDate}
-              onChange={(date) => {
-                setBirthDate(date)
-              }}
-              peekNextMonth
-              showMonthDropdown
-              showYearDropdown
-              todayButton="Today"
-              dropdownMode="select"
-              placeholderText="Date of Birth (DD/MM/YYYY)"
+            <input className="form-input" type="text" name='firstName' id='firstName' placeholder="First Name" {...register("firstName", {
+              required: "Is required",
+              minLength: {
+                value: 2,
+                message: "Should contains at least 2 characters"
+              }    
+            })} />
+            <ErrorMessage
+              errors={errors}
+              name="firstName"
+              render={({ messages }) =>
+                messages &&
+                Object.entries(messages).map(([type, message]) => (
+                  <p key={type}>{message}</p>
+                ))
+              }
             />
 
-            <DatePicker
-              id='startDate'
-              name='startDate'
-              selected={startDate}
-              onChange={(date) => {
-                setStartDate(date)
-              }}
-              peekNextMonth
-              showMonthDropdown
-              showYearDropdown
-              todayButton="Today"
-              dropdownMode="select"
-              placeholderText="Start Date (DD/MM/YYYY)"
+            <input className="form-input" type="text" name='lastName' id='lastName' placeholder="Last Name" {...register("lastName", {
+              required: "Is required",
+              minLength: {
+                value: 2,
+                message: "Should contains at least 2 characters"
+              }    
+            })} />
+            <ErrorMessage
+              errors={errors}
+              name="lastName"
+              render={({ messages }) =>
+                messages &&
+                Object.entries(messages).map(([type, message]) => (
+                  <p key={type}>{message}</p>
+                ))
+              }
+            />
+
+            <Controller
+              control={control}
+              name="dateOfBirth"
+              rules={{ required: true }}
+              render={({
+                field: { onChange, onBlur, value, name, ref },
+                fieldState: { invalid, isTouched, isDirty, error },
+                formState,
+              }) => (
+                <DatePicker
+                id='dateOfBirth'
+                onChange={onChange}
+                selected={value}
+                peekNextMonth
+                showMonthDropdown
+                showYearDropdown
+                todayButton="Today"
+                dropdownMode="select"
+                placeholderText="Date of Birth (DD/MM/YYYY)"
+                />
+              )}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="dateOfBirth"
+              message={'Is required'}
+              as={'p'}
+            />
+
+            <Controller
+              control={control}
+              name="startDate"
+              rules={{ required: true }}
+              render={({
+                field: { onChange, onBlur, value, name, ref },
+                fieldState: { invalid, isTouched, isDirty, error },
+                formState,
+              }) => (
+                <DatePicker
+                id='startDate'
+                onChange={onChange}
+                selected={value}
+                peekNextMonth
+                showMonthDropdown
+                showYearDropdown
+                todayButton="Today"
+                dropdownMode="select"
+                placeholderText="Start Date (DD/MM/YYYY)"
+                />
+              )}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="startDate"
+              message={'Is required'}
+              as={'p'}
             />
 
             <div className='employee-department'>
-              <Dropdown name="departments" id="department" options={departmentsOptions} placeholder="Department" onChange={(event) => handleDropDownChange(event, 'department')} />
+              <Controller
+                control={control}
+                name="departments"
+                rules={{ required: true }}
+                render={({
+                  field: { onChange, onBlur, value, name, ref },
+                  fieldState: { invalid, isTouched, isDirty, error },
+                  formState,
+                }) => (
+                  <Dropdown
+                    name="departments"
+                    id="department"
+                    options={departmentsOptions}
+                    placeholder="Department"
+                    onChange={onChange}
+                  />
+                )}
+              />
+              <ErrorMessage
+              errors={errors}
+              name="departments"
+              message={'Is required'}
+              as={'p'}
+            />
             </div>
           </fieldset>
 
           <fieldset className="employee-address">
             <legend className="fieldset-legend">Address</legend>
 
-            <input className="form-input" name="street" id="street" type="text" placeholder="Street" onChange={handleTextInputChange} />
+            <input className="form-input" name="street" id="street" type="text" placeholder="Street" {...register("street", {
+              required: "Is required",
+              minLength: {
+                value: 2,
+                message: "Should contains at least 2 characters"
+              }    
+            })} />
+            <ErrorMessage
+              errors={errors}
+              name="street"
+              render={({ messages }) =>
+                messages &&
+                Object.entries(messages).map(([type, message]) => (
+                  <p key={type}>{message}</p>
+                ))
+              }
+            />
 
-            <input className="form-input" name="city" id="city" type="text" placeholder="City" onChange={handleTextInputChange} />
+            <input className="form-input" name="city" id="city" type="text" placeholder="City" {...register("city", {
+              required: "Is required",
+              minLength: {
+                value: 2,
+                message: "Should contains at least 2 characters"
+              }    
+            })} />
+            <ErrorMessage
+              errors={errors}
+              name="city"
+              render={({ messages }) =>
+                messages &&
+                Object.entries(messages).map(([type, message]) => (
+                  <p key={type}>{message}</p>
+                ))
+              }
+            />
 
-            <Dropdown name="state" id="state" options={statesOptions} placeholder="State" onChange={(event) => handleDropDownChange(event, 'state')} />
+            <Controller
+              control={control}
+              name="state"
+              rules={{ required: true }}
+              render={({
+                field: { onChange, onBlur, value, name, ref },
+                fieldState: { invalid, isTouched, isDirty, error },
+                formState,
+              }) => (
+                <Dropdown
+                  name="state"
+                  id="state"
+                  options={statesOptions}
+                  placeholder="State"
+                  onChange={onChange}
+                />
+              )}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="state"
+              message={'Is required'}
+              as={'p'}
+            />
 
-            <input className="form-input" name="zipCode" id="zipCode" type="text" placeholder="Zip Code" onChange={handleTextInputChange} />
+            <input className="form-input" name="zipCode" id="zipCode" type="text" placeholder="Zip Code" {...register("zipCode", {
+              required: "Is required",
+              minLength: {
+                value: 5,
+                message: "Should contains 5 characters"
+              }    
+            })} />
+            <ErrorMessage
+              errors={errors}
+              name="zipCode"
+              render={({ messages }) =>
+                messages &&
+                Object.entries(messages).map(([type, message]) => (
+                  <p key={type}>{message}</p>
+                ))
+              }
+            />
           </fieldset>
         </form>
 
