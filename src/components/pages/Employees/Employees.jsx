@@ -1,4 +1,4 @@
-import Table from '../../utils/Table';
+import Table from '../../utils/Table/Table';
 import { useMemo, useState, useEffect } from 'react';
 import { getEmployeesList } from '../../../services/employeesService';
 import './Employees.css';

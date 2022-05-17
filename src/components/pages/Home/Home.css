@@ -40,7 +40,7 @@
   border: none;
 }
 
-.form-input, .react-datepicker-wrapper input {
+.form-input {
   width: -webkit-fill-available;
   height: 18px;
   border: 1px solid #ccc;
@@ -68,12 +68,6 @@
   background-color: #F9FAEF;
 }
 
-.ReactModal__Content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .button-save {
   background: #6D850F;
   padding: 10px;
@@ -92,4 +86,15 @@
   font-weight: bold;
   width: 100%;
   height: 25px;
+}
+
+.input-error {
+  color: red;
+  font-size: xx-small;
+  margin: 5px 0;
+}
+
+.is-invalid {
+  /* use important for react-dropdown */
+  border-color: red !important; 
 }

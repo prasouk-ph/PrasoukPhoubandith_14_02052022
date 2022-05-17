@@ -8,6 +8,7 @@ import 'react-dropdown/style.css';
 import { addEmployee } from "../../../services/employeesService";
 import { useForm, Controller } from "react-hook-form";
 import { ErrorMessage } from '@hookform/error-message';
+import FormInput from "../../utils/FormInput/FormInput";
 
 
 function Home() {
@@ -40,7 +41,7 @@ function Home() {
       city: data.city,
       state: data.state.label,
       zipCode: data.zipCode,
-      departments: data.departments.label
+      department: data.departments.label
     }
 
     try {
@@ -134,104 +135,186 @@ function Home() {
           <fieldset className='employee-data'>
             <legend className="fieldset-legend" >Informations</legend>
             
-            <input className="form-input" type="text" name='firstName' id='firstName' placeholder="First Name" {...register("firstName", {
-              required: "Is required",
-              minLength: {
-                value: 2,
-                message: "Should contains at least 2 characters"
-              }    
-            })} />
-            <ErrorMessage
-              errors={errors}
-              name="firstName"
-              render={({ messages }) =>
-                messages &&
-                Object.entries(messages).map(([type, message]) => (
-                  <p key={type}>{message}</p>
-                ))
-              }
-            />
+            <FormInput>
+              <input className={`form-input ${errors.firstName && 'is-invalid'}`} type="text" name='firstName' id='firstName' placeholder="First Name" {...register("firstName", {
+                required: "Is required",
+                minLength: {
+                  value: 2,
+                  message: "Should contains at least 2 characters"
+                }    
+              })} />
+              <ErrorMessage
+                errors={errors}
+                name="firstName"
+                render={({ messages }) =>
+                  messages &&
+                  Object.entries(messages).map(([type, message]) => (
+                    <p className="input-error" key={type}>{message}</p>
+                  ))
+                }
+              />
+            </FormInput>
 
-            <input className="form-input" type="text" name='lastName' id='lastName' placeholder="Last Name" {...register("lastName", {
-              required: "Is required",
-              minLength: {
-                value: 2,
-                message: "Should contains at least 2 characters"
-              }    
-            })} />
-            <ErrorMessage
-              errors={errors}
-              name="lastName"
-              render={({ messages }) =>
-                messages &&
-                Object.entries(messages).map(([type, message]) => (
-                  <p key={type}>{message}</p>
-                ))
-              }
-            />
+            <FormInput>
+              <input className={`form-input ${errors.lastName && 'is-invalid'}`} type="text" name='lastName' id='lastName' placeholder="Last Name" {...register("lastName", {
+                required: "Is required",
+                minLength: {
+                  value: 2,
+                  message: "Should contains at least 2 characters"
+                }    
+              })} />
+              <ErrorMessage
+                errors={errors}
+                name="lastName"
+                render={({ messages }) =>
+                  messages &&
+                  Object.entries(messages).map(([type, message]) => (
+                    <p className="input-error" key={type}>{message}</p>
+                  ))
+                }
+              />
+            </FormInput>
 
-            <Controller
-              control={control}
-              name="dateOfBirth"
-              rules={{ required: true }}
-              render={({
-                field: { onChange, onBlur, value, name, ref },
-                fieldState: { invalid, isTouched, isDirty, error },
-                formState,
-              }) => (
-                <DatePicker
-                id='dateOfBirth'
-                onChange={onChange}
-                selected={value}
-                peekNextMonth
-                showMonthDropdown
-                showYearDropdown
-                todayButton="Today"
-                dropdownMode="select"
-                placeholderText="Date of Birth (DD/MM/YYYY)"
-                />
-              )}
-            />
-            <ErrorMessage
-              errors={errors}
-              name="dateOfBirth"
-              message={'Is required'}
-              as={'p'}
-            />
-
-            <Controller
-              control={control}
-              name="startDate"
-              rules={{ required: true }}
-              render={({
-                field: { onChange, onBlur, value, name, ref },
-                fieldState: { invalid, isTouched, isDirty, error },
-                formState,
-              }) => (
-                <DatePicker
-                id='startDate'
-                onChange={onChange}
-                selected={value}
-                peekNextMonth
-                showMonthDropdown
-                showYearDropdown
-                todayButton="Today"
-                dropdownMode="select"
-                placeholderText="Start Date (DD/MM/YYYY)"
-                />
-              )}
-            />
-            <ErrorMessage
-              errors={errors}
-              name="startDate"
-              message={'Is required'}
-              as={'p'}
-            />
-
-            <div className='employee-department'>
+            <FormInput>
               <Controller
                 control={control}
+                name="dateOfBirth"
+                rules={{ required: true }}
+                render={({
+                  field: { onChange, onBlur, value, name, ref },
+                  fieldState: { invalid, isTouched, isDirty, error },
+                  formState,
+                }) => (
+                  <DatePicker
+                  id='dateOfBirth'
+                  onChange={onChange}
+                  selected={value}
+                  peekNextMonth
+                  showMonthDropdown
+                  showYearDropdown
+                  todayButton="Today"
+                  dropdownMode="select"
+                  placeholderText="Date of Birth (DD/MM/YYYY)"
+                  className={`form-input ${errors.dateOfBirth && 'is-invalid'}`}
+                  />
+                )}
+              />
+              <ErrorMessage
+                errors={errors}
+                name="dateOfBirth"
+                message={<p className="input-error">Is required</p>}
+              />
+            </FormInput>
+
+            <FormInput>
+              <Controller
+                control={control}
+                name="startDate"
+                rules={{ required: true }}
+                render={({
+                  field: { onChange, onBlur, value, name, ref },
+                  fieldState: { invalid, isTouched, isDirty, error },
+                  formState,
+                }) => (
+                  <DatePicker
+                  id='startDate'
+                  onChange={onChange}
+                  selected={value}
+                  peekNextMonth
+                  showMonthDropdown
+                  showYearDropdown
+                  todayButton="Today"
+                  dropdownMode="select"
+                  placeholderText="Start Date (DD/MM/YYYY)"
+                  className={`form-input ${errors.startDate && 'is-invalid'}`}
+                  />
+                )}
+              />
+              <ErrorMessage
+                errors={errors}
+                name="startDate"
+                message={<p className="input-error">Is required</p>}
+              />
+            </FormInput>
+
+            <div className='employee-department'>
+              <FormInput>
+                <Controller
+                  control={control}
+                  name="departments"
+                  rules={{ required: true }}
+                  render={({
+                    field: { onChange, onBlur, value, name, ref },
+                    fieldState: { invalid, isTouched, isDirty, error },
+                    formState,
+                  }) => (
+                    <Dropdown
+                      name="departments"
+                      id="department"
+                      options={departmentsOptions}
+                      placeholder="Department"
+                      onChange={onChange}
+                      controlClassName={errors.departments && 'is-invalid'}
+                    />
+                  )}
+                />
+                <ErrorMessage
+                errors={errors}
                 name="departments"
+                message={<p className="input-error">Is required</p>}
+                />
+              </FormInput>
+                
+            </div>
+          </fieldset>
+
+          <fieldset className="employee-address">
+            <legend className="fieldset-legend">Address</legend>
+
+            <FormInput>    
+              <input className={`form-input ${errors.street && 'is-invalid'}`} name="street" id="street" type="text" placeholder="Street" {...register("street", {
+                required: "Is required",
+                minLength: {
+                  value: 2,
+                  message: "Should contains at least 2 characters"
+                }    
+              })} />
+              <ErrorMessage
+                errors={errors}
+                name="street"
+                render={({ messages }) =>
+                  messages &&
+                  Object.entries(messages).map(([type, message]) => (
+                    <p className="input-error" key={type}>{message}</p>
+                  ))
+                }
+              />
+            </FormInput>
+
+            <FormInput>                
+              <input className={`form-input ${errors.city && 'is-invalid'}`} name="city" id="city" type="text" placeholder="City" {...register("city", {
+                required: "Is required",
+                minLength: {
+                  value: 2,
+                  message: "Should contains at least 2 characters"
+                }    
+              })} />
+              <ErrorMessage
+                errors={errors}
+                name="city"
+                render={({ messages }) =>
+                  messages &&
+                  Object.entries(messages).map(([type, message]) => (
+                    <p className="input-error" key={type}>{message}</p>
+                  ))
+                }
+              />
+            </FormInput>
+            
+            <FormInput>      
+              <Controller
+                control={control}
+                name="state"
                 rules={{ required: true }}
                 render={({
                   field: { onChange, onBlur, value, name, ref },
@@ -239,104 +322,41 @@ function Home() {
                   formState,
                 }) => (
                   <Dropdown
-                    name="departments"
-                    id="department"
-                    options={departmentsOptions}
-                    placeholder="Department"
+                    name="state"
+                    id="state"
+                    options={statesOptions}
+                    placeholder="State"
                     onChange={onChange}
+                    controlClassName={errors.state && 'is-invalid'}
                   />
                 )}
               />
               <ErrorMessage
-              errors={errors}
-              name="departments"
-              message={'Is required'}
-              as={'p'}
-            />
-            </div>
-          </fieldset>
+                errors={errors}
+                name="state"
+                message={<p className="input-error">Is required</p>}
+              />
+            </FormInput>
 
-          <fieldset className="employee-address">
-            <legend className="fieldset-legend">Address</legend>
-
-            <input className="form-input" name="street" id="street" type="text" placeholder="Street" {...register("street", {
-              required: "Is required",
-              minLength: {
-                value: 2,
-                message: "Should contains at least 2 characters"
-              }    
-            })} />
-            <ErrorMessage
-              errors={errors}
-              name="street"
-              render={({ messages }) =>
-                messages &&
-                Object.entries(messages).map(([type, message]) => (
-                  <p key={type}>{message}</p>
-                ))
-              }
-            />
-
-            <input className="form-input" name="city" id="city" type="text" placeholder="City" {...register("city", {
-              required: "Is required",
-              minLength: {
-                value: 2,
-                message: "Should contains at least 2 characters"
-              }    
-            })} />
-            <ErrorMessage
-              errors={errors}
-              name="city"
-              render={({ messages }) =>
-                messages &&
-                Object.entries(messages).map(([type, message]) => (
-                  <p key={type}>{message}</p>
-                ))
-              }
-            />
-
-            <Controller
-              control={control}
-              name="state"
-              rules={{ required: true }}
-              render={({
-                field: { onChange, onBlur, value, name, ref },
-                fieldState: { invalid, isTouched, isDirty, error },
-                formState,
-              }) => (
-                <Dropdown
-                  name="state"
-                  id="state"
-                  options={statesOptions}
-                  placeholder="State"
-                  onChange={onChange}
-                />
-              )}
-            />
-            <ErrorMessage
-              errors={errors}
-              name="state"
-              message={'Is required'}
-              as={'p'}
-            />
-
-            <input className="form-input" name="zipCode" id="zipCode" type="text" placeholder="Zip Code" {...register("zipCode", {
-              required: "Is required",
-              minLength: {
-                value: 5,
-                message: "Should contains 5 characters"
-              }    
-            })} />
-            <ErrorMessage
-              errors={errors}
-              name="zipCode"
-              render={({ messages }) =>
-                messages &&
-                Object.entries(messages).map(([type, message]) => (
-                  <p key={type}>{message}</p>
-                ))
-              }
-            />
+            <FormInput>    
+              <input className={`form-input ${errors.zipCode && 'is-invalid'}`} name="zipCode" id="zipCode" type="text" placeholder="Zip Code" {...register("zipCode", {
+                required: "Is required",
+                minLength: {
+                  value: 5,
+                  message: "Should contains 5 characters"
+                }    
+              })} />
+              <ErrorMessage
+                errors={errors}
+                name="zipCode"
+                render={({ messages }) =>
+                  messages &&
+                  Object.entries(messages).map(([type, message]) => (
+                    <p className="input-error" key={type}>{message}</p>
+                  ))
+                }
+              />
+            </FormInput>
           </fieldset>
         </form>
 
