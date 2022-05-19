@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import { addEmployee } from "../../../services/employeesService";
+import { getItem, addItem } from '../../../services/LocaleStorage'
 import { useForm, Controller } from "react-hook-form";
 import { ErrorMessage } from '@hookform/error-message';
 import FormInput from "../../utils/FormInput/FormInput";
@@ -45,8 +45,9 @@ function Home() {
     }
 
     try {
-      addEmployee(formFormatted)
-      setModalMessage("Employee Created!")
+      const employees = JSON.parse(getItem("employees") || "[]") // create an empty array if doesn't exist
+      employees.push(formFormatted)
+    addItem("employees", JSON.stringify(employees))
     } catch (error) {
       setModalMessage("Can't create employee because of database issues!")
     }

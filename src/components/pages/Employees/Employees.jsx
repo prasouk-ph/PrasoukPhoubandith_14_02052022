@@ -1,6 +1,6 @@
 import Table from '../../utils/Table/Table';
 import { useMemo, useState, useEffect } from 'react';
-import { getEmployeesList } from '../../../services/employeesService';
+import { getItem } from '../../../services/LocaleStorage'
 import './Employees.css';
 
 
@@ -11,7 +11,7 @@ function Employees() {
 
   async function getData() {
     try {
-      const employeesList = await getEmployeesList()
+      const employeesList = JSON.parse(getItem("employees") || "[]") // create an empty array if doesn't exist
       setEmployees(employeesList)
       setError(false)
     } catch (error) {
