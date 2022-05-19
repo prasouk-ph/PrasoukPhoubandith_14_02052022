@@ -6,12 +6,7 @@ import { getFirestore } from 'firebase/firestore/lite';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyADiGFRSI1T8oawKzsuzgCDq3N1eApwzKo",
-  authDomain: "wealth-health-eb909.firebaseapp.com",
-  projectId: "wealth-health-eb909",
-  storageBucket: "wealth-health-eb909.appspot.com",
-  messagingSenderId: "518482065915",
-  appId: "1:518482065915:web:991cf781c4bad1ad46f35e"
+  
 };
 
 // Initialize Firebase
