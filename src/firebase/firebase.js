@@ -6,7 +6,6 @@ import { getFirestore } from 'firebase/firestore/lite';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyADiGFRSI1T8oawKzsuzgCDq3N1eApwzKo",
   authDomain: "wealth-health-eb909.firebaseapp.com",
   projectId: "wealth-health-eb909",
   storageBucket: "wealth-health-eb909.appspot.com",
