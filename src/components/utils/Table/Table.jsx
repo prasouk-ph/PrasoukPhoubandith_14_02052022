@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useTable, useSortBy, useGlobalFilter, useAsyncDebounce, usePagination } from 'react-table'
-import './Table.css'
+import { useTable, useSortBy, useGlobalFilter, useAsyncDebounce, usePagination } from 'react-table';
+import './Table.css';
 
 
 function Table({ columns, data, className, error }) {

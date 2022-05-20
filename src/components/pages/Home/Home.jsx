@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './Home.css';
-import Modal from 'react-modal-for-wealth-health'
+import Modal from 'react-modal-for-wealth-health';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Dropdown from 'react-dropdown';
@@ -181,9 +181,7 @@ function Home() {
                 name="dateOfBirth"
                 rules={{ required: true }}
                 render={({
-                  field: { onChange, onBlur, value, name, ref },
-                  fieldState: { invalid, isTouched, isDirty, error },
-                  formState,
+                  field: { onChange, value },
                 }) => (
                   <DatePicker
                   id='dateOfBirth'
@@ -212,9 +210,7 @@ function Home() {
                 name="startDate"
                 rules={{ required: true }}
                 render={({
-                  field: { onChange, onBlur, value, name, ref },
-                  fieldState: { invalid, isTouched, isDirty, error },
-                  formState,
+                  field: { onChange, value },
                 }) => (
                   <DatePicker
                   id='startDate'
