@@ -240,9 +240,7 @@ function Home() {
                   name="departments"
                   rules={{ required: true }}
                   render={({
-                    field: { onChange, onBlur, value, name, ref },
-                    fieldState: { invalid, isTouched, isDirty, error },
-                    formState,
+                    field: { onChange },
                   }) => (
                     <Dropdown
                       name="departments"
@@ -313,9 +311,7 @@ function Home() {
                 name="state"
                 rules={{ required: true }}
                 render={({
-                  field: { onChange, onBlur, value, name, ref },
-                  fieldState: { invalid, isTouched, isDirty, error },
-                  formState,
+                  field: { onChange },
                 }) => (
                   <Dropdown
                     name="state"
