@@ -187,7 +187,6 @@ function Home() {
                   id='dateOfBirth'
                   onChange={onChange}
                   selected={value}
-                  peekNextMonth
                   showMonthDropdown
                   showYearDropdown
                   todayButton="Today"
@@ -216,7 +215,6 @@ function Home() {
                   id='startDate'
                   onChange={onChange}
                   selected={value}
-                  peekNextMonth
                   showMonthDropdown
                   showYearDropdown
                   todayButton="Today"
