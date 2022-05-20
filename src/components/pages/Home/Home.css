@@ -61,7 +61,7 @@
 }
 
 .react-datepicker__day--outside-month {
-  color: grey;
+  color: grey !important;
 }
 
 .Dropdown-option:hover, .Dropdown-option.is-selected {
