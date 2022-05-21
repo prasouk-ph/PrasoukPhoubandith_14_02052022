@@ -1929,7 +1929,7 @@
   "resolved" "https://registry.npmjs.org/@protobufjs/utf8/-/utf8-1.1.0.tgz"
   "version" "1.1.0"
 
-"@reduxjs/toolkit@^1.8.1":
+"@reduxjs/toolkit@^1.6.1", "@reduxjs/toolkit@^1.8.1":
   "integrity" "sha512-Q6mzbTpO9nOYRnkwpDlFOAbQnd3g7zj7CtHAZWz5SzE5lcV97Tf8f3SzOO8BoPOMYBFgfZaqTUZqgGu+a0+Fng=="
   "resolved" "https://registry.npmjs.org/@reduxjs/toolkit/-/toolkit-1.8.1.tgz"
   "version" "1.8.1"
@@ -8122,6 +8122,11 @@
   "version" "4.2.0"
   dependencies:
     "@babel/runtime" "^7.9.2"
+
+"reduxjs-toolkit-persist@^7.2.1":
+  "integrity" "sha512-1gu9Qid0qXlsM4a2D8eHx/YOwa7I0lgAXqM0KYQoX2RA+KMezkq5wkJKEMLoUkpqVuWYHRdU7auS2/jFVsR0gQ=="
+  "resolved" "https://registry.npmjs.org/reduxjs-toolkit-persist/-/reduxjs-toolkit-persist-7.2.1.tgz"
+  "version" "7.2.1"
 
 "regenerate-unicode-properties@^10.0.1":
   "integrity" "sha512-vn5DU6yg6h8hP/2OkQo3K7uVILvY4iu0oI4t3HFa81UPkhGJwkRwM10JEc3upjdhHjs/k8GJY1sRBhk5sr69Bw=="

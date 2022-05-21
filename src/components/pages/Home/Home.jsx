@@ -5,7 +5,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-// import { getItem, addItem } from '../../../services/LocaleStorage'
 import { useDispatch } from 'react-redux';
 import { addEmployee } from '../../../store/store'
 import { useForm, Controller } from "react-hook-form";
@@ -32,6 +31,7 @@ function Home() {
   function closeModal() {
     setModalIsActive(false);
   }
+
 
   function onSubmit(data) {
     const dateOfBirthFormatted = new Date(data.dateOfBirth).toLocaleDateString('en-US', { month: "2-digit", day: "2-digit", year: "numeric" })

@@ -1,31 +1,14 @@
 import Table from '../../utils/Table/Table';
-// import { useMemo, useState, useEffect } from 'react';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+// import { useMemo } from 'react';
 import { useSelector } from 'react-redux'
 // import { getItem } from '../../../services/LocaleStorage'
 import './Employees.css';
 
 
 function Employees() {
-  // const [employees, setEmployees] = useState([])
-  // const [error, setError] = useState(false)
+  const [error] = useState(false)
   const employeesList = useSelector((state) => state.employees)
-  console.log(employeesList)
-
-  // async function getData() {
-  //   try {
-  //     // const employeesList = JSON.parse(getItem("employees") || "[]") // create an empty array if doesn't exist
-  //     // setEmployees(employeesList)
-  //     setError(false)
-  //   } catch (error) {
-  //     setError(true)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getData()
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [])
 
   const columns = useMemo(
     () => [
@@ -90,8 +73,7 @@ function Employees() {
       </header>
 
       <main className='employees-main'>
-        {/* <Table className='employees-table' columns={columns} data={data} error={error} /> */}
-        <Table className='employees-table' columns={columns} data={data} />
+        <Table className='employees-table' columns={columns} data={data} error={error} />
       </main>
     </div>
   );

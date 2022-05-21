@@ -1,4 +1,14 @@
-import { configureStore, createAction, createReducer } from '@reduxjs/toolkit'
+import { configureStore, createAction, createReducer, getDefaultMiddleware } from '@reduxjs/toolkit'
+import { persistCombineReducers, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'reduxjs-toolkit-persist';
+import storage from 'reduxjs-toolkit-persist/lib/storage'
+import autoMergeLevel1 from 'reduxjs-toolkit-persist/lib/stateReconciler/autoMergeLevel1';
+
+
+const persistConfig = {
+  key: 'root',
+  storage: storage,
+  stateReconciler: autoMergeLevel1,
+};
 
 export const addEmployee = createAction(
   "addEmployee",
@@ -15,9 +25,21 @@ const employeesReducer = createReducer([], (builder) =>
   })
 )
 
+const _persistedReducer = persistCombineReducers(persistConfig, {employees: employeesReducer});
 
 export default configureStore({
-  reducer : {
-      employees: employeesReducer
-  }
+  reducer: _persistedReducer,
+  middleware: getDefaultMiddleware({
+    serializableCheck: {
+      /* ignore persistance actions */
+      ignoredActions: [
+        FLUSH,
+        REHYDRATE,
+        PAUSE,
+        PERSIST,
+        PURGE,
+        REGISTER
+      ],
+    },
+  }),
 });
