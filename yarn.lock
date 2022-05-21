@@ -7893,9 +7893,9 @@
   "version" "3.0.4"
 
 "react-modal-for-wealth-health@^1.0.0":
-  "integrity" "sha512-g0wWJEh/0KAVSgatW87t1VZoU2QKsESflD/oYVVYNDU0iWk4G9ce/a0imUgYYdGSZ0I2pgGmrs0HLzRNZ0sB+A=="
-  "resolved" "https://registry.npmjs.org/react-modal-for-wealth-health/-/react-modal-for-wealth-health-1.0.0.tgz"
-  "version" "1.0.0"
+  "integrity" "sha512-lkrjfPC5ethgGyMgR+5cJv8Sk57nWqcvmcM49jt+b83OLROQWl2ZRFTm4j0WCa53vnho0s41yPHZYBd8kOIbfw=="
+  "resolved" "https://registry.npmjs.org/react-modal-for-wealth-health/-/react-modal-for-wealth-health-1.0.7.tgz"
+  "version" "1.0.7"
 
 "react-modal@^3.15.1":
   "integrity" "sha512-duB9bxOaYg7Zt6TMFldIFxQRtSP+Dg3F1ZX3FXxSUn+3tZZ/9JCgeAQKDg7rhZSAqopq8TFRw3yIbnx77gyFTw=="
