@@ -5,7 +5,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import { getItem, addItem } from '../../../services/LocaleStorage'
+// import { getItem, addItem } from '../../../services/LocaleStorage'
+import { useDispatch } from 'react-redux';
+import { addEmployee } from '../../../store/store'
 import { useForm, Controller } from "react-hook-form";
 import { ErrorMessage } from '@hookform/error-message';
 import FormInput from "../../utils/FormInput/FormInput";
@@ -14,6 +16,8 @@ import FormInput from "../../utils/FormInput/FormInput";
 function Home() {
   const [modalIsActive, setModalIsActive] = useState(false);
   const [modalMessage, setModalMessage] = useState("Employee Created!");
+
+  const dispatch = useDispatch()
 
   const { register, handleSubmit, formState: { errors }, control } = useForm({
     criteriaMode: "all"
@@ -43,17 +47,17 @@ function Home() {
       zipCode: data.zipCode,
       department: data.departments.label
     }
-
+    
     try {
-      const employees = JSON.parse(getItem("employees") || "[]") // create an empty array if doesn't exist
-      employees.push(formFormatted)
-    addItem("employees", JSON.stringify(employees))
+      dispatch(addEmployee(formFormatted))
+      setModalMessage("Employee Created!")
     } catch (error) {
       setModalMessage("Can't create employee because of database issues!")
     }
     
     openModal()
   }
+  
 
   const statesOptions = [
     { value: 'AL', label: 'Alabama' },
